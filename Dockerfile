@@ -7,10 +7,10 @@ COPY . .
 RUN apt-get install maven -y
 RUN mvn clean install
 
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre-alpine
 
 EXPOSE 8080
 
-COPY --from=build /target/park_mobile_api-1.0.0.jar app.jar
+COPY --from=build /target/*.jar app.jar
 
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
